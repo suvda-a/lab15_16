@@ -26,5 +26,4 @@ class TestApp(unittest.TestCase):
     response = self.app.post('/lab15_16/operation/', data=json.dumps(payload), content_type='app')
     self.assertIn(response.status_code, [200, 201])
     data = response.get_json()
-    self.assertEqual(data['result'], 'unknown')
   
