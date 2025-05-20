@@ -1,0 +1,136 @@
+1. /restapi фолдер үүсгэх
+2. app.py файл үүсгээд доорх кодыг бичих
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+data_store = {"book":"Modern C++","phone":"iPhone 14"}
+
+@app.route('/intro', methods=['GET'])
+def hello():
+    return "This is HTTP REST API."
+
+@app.route('/product/<key>', methods=['GET'])
+def get_product(key):
+    return jsonify({key: data_store.get(key, "Not found")})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
+
+3. requirements.txt файл үүсгээд доорх мөрийг бичих
+
+flask
+
+4. Dockerfile файл үүсгээд доорх командыг бичих
+
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py .
+CMD ["python", "app.py"]
+
+5. build хийж ажиллуулах
+
+docker build -t flask-web .
+docker run -d -p 5000:5000 flask-web
+
+6. app.py файлд бүх бараагаа хэвлэх кодыг нэмэх
+
+@app.route('/products', methods=['GET'])
+def get_products():
+    return jsonify(data_store)
+
+7. Одоо ажиллаж байгаа docker image-ийг зогсоож устгах
+docker ps -a
+docker stop <container_id>
+docker rm <container_id>
+
+8. 5-р үйлдлийг хийж кодийн өөрчлөлтөө дахин ажиллуулах
+9. curl командыг ашиглаж шалгах (READ үйлдэл)
+
+curl http://localhost:5000/intro
+curl http://localhost:5000/products
+
+10. docker-compose.yml файл үүсгэж доорх кодыг бичих
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+11. app.py файлд доорх өөрчлөлт хийх
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
+
+12. build хийж ажиллуулах.
+
+docker-compose up -d --build
+
+13. app.py файлд доорх кодыг нэмэх (POST хүсэлтэнд хариулах CREATE үйлдэл)
+    11-р үйлдлээр кодыг өөрчлөхөд, docker-ийг унтраах/асаах шаардлагагүй болно.
+    Код өөрчлөгдөхөд өөрчлөлт шууд харагдана.
+
+@app.route('/product/<key>', methods=['POST'])
+def create_product(key):
+    value = request.json.get('value')
+    data_store[key] = value
+    return jsonify({key: value}), 201
+
+14. curl команд ашиглаж шалгах
+
+Mac, Ubuntu:
+curl -X POST http://localhost:5000/product/computer -H "Content-Type: application/json" -d '{"value": "MacBook Pro"}'
+
+cmd on Windows:
+curl -X POST http://localhost:5000/product/computer -H "Content-Type: application/json" -d "{\"value\": \"MacBook Pro\"}"
+
+Powershell on Windows (VSCode)
+curl -Method POST http://localhost:5000/product/computer -Headers @{"Content-Type"="application/json"} -Body '{"value": "MacBook Pro"}'
+
+curl http://localhost:5000/products
+
+15. app.py файлд доорх кодыг нэмэх (PUT хүсэлтэнд хариулах UPDATE үйлдэл)
+
+@app.route('/product/<key>', methods=['PUT'])
+def update_product(key):
+    value = request.json.get('value')
+    if key in data_store:
+        data_store[key] = value
+        return jsonify({key: value})
+    return "Not found", 404
+
+16. curl команд ашиглаж шалгах
+
+Mac, Ubuntu:
+curl -X PUT http://localhost:5000/product/computer -H "Content-Type: application/json" -d '{"value": "MacBook Pro M2"}'
+
+cmd on Windows:
+curl -X PUT http://localhost:5000/product/computer -H "Content-Type: application/json" -d "{\"value\": \"MacBook Pro M2\"}"
+
+Powershell on Windows (VSCode)
+curl -Method PUT http://localhost:5000/product/computer -Headers @{"Content-Type"="application/json"} -Body '{"value": "MacBook Pro M2"}'
+
+curl http://localhost:5000/products
+
+17. app.py файлд доорх кодыг нэмэх (DELETE хүсэлтэнд хариулах)
+    Бүрэн кодыг хавсаргав.
+
+@app.route('/product/<key>', methods=['DELETE'])
+def delete_product(key):
+    if key in data_store:
+        del data_store[key]
+        return "Deleted", 204
+    return "Not found", 404
+
+18. curl команд ашиглаж шалгах
+
+curl -X DELETE http://localhost:5000/product/book
+curl http://localhost:5000/products
+
+
