@@ -3,10 +3,6 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 data_store = {"book": "Modern C++", "phone": "iPhone 14"}
 
-# @app.route('/intro', methods= ['GET'])
-# def hello():
-#   return "This is HTTP REST API. testing after docker compose"
-
 @app.route('lab15_16/operation/', methods=['POST'])
 def calculate():
   data = request.get_json()
