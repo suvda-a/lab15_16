@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 data_store = {"book": "Modern C++", "phone": "iPhone 14"}
 
-@app.route('lab15_16/operation/', methods=['POST'])
+@app.route('/lab15_16/operation/', methods=['POST'])
 def calculate():
   data = request.get_json()
 
