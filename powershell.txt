@@ -1,0 +1,265 @@
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git branch -M main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git remote add origin https://github.com/suvda-a/lab15_16.git
+error: remote origin already exists.
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push -u origin main
+To https://github.com/suvda-a/lab15_16.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/suvda-a/lab15_16.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push -u origin main
+To https://github.com/suvda-a/lab15_16.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/suvda-a/lab15_16.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git pull --rebase origin main
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 872 bytes | 124.00 KiB/s, done.
+From https://github.com/suvda-a/lab15_16
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Successfully rebased and updated refs/heads/main.
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push -u origin main      
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 2.45 KiB | 626.00 KiB/s, done.
+Total 7 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/suvda-a/lab15_16.git
+   8e920b8..c43375a  main -> main
+branch 'main' set up to track 'origin/main'.
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Dockerfile
+        modified:   app.py
+        modified:   docker-compose.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .github/
+        app_unit_test.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'correct app file, ci-cd'
+[main f2f7a2d] correct app file, ci-cd
+ 5 files changed, 148 insertions(+), 43 deletions(-)
+ create mode 100644 .github/workflows/ci-cd.yml
+ create mode 100644 app_unit_test.py
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (9/9), 2.46 KiB | 838.00 KiB/s, done.
+Total 9 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/suvda-a/lab15_16.git
+   c43375a..f2f7a2d  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'ci-cd'                  
+[main 1102d0b] ci-cd
+ 1 file changed, 1 deletion(-)
+ rename app_unit_test.py => tests/app_unit_test.py (95%)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 634 bytes | 634.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   f2f7a2d..1102d0b  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    tests/app_unit_test.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tests/test_app.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'Docker Related files Updated'
+[main 139ce51] Docker Related files Updated
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename tests/{app_unit_test.py => test_app.py} (100%)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 306 bytes | 306.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   1102d0b..139ce51  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   app.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'ci/cd failure'               
+[main 0def688] ci/cd failure
+ 1 file changed, 4 deletions(-)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 288 bytes | 288.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/suvda-a/lab15_16.git
+   139ce51..0def688  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'moved workflows to .git'
+[main 46aa165] moved workflows to .git
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {.github/workflows => workflows}/ci-cd.yml (100%)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 1.04 KiB | 1.04 MiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   0def688..46aa165  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'moved workflows to .git'
+[main cc39e5d] moved workflows to .git
+ 1 file changed, 69 deletions(-)
+ delete mode 100644 workflows/ci-cd.yml
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+To https://github.com/suvda-a/lab15_16.git
+   0def688..46aa165  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'moved workflows to .git'
+[main cc39e5d] moved workflows to .git
+ 1 file changed, 69 deletions(-)
+ delete mode 100644 workflows/ci-cd.yml
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+[main cc39e5d] moved workflows to .git
+ 1 file changed, 69 deletions(-)
+ delete mode 100644 workflows/ci-cd.yml
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+ 1 file changed, 69 deletions(-)
+ delete mode 100644 workflows/ci-cd.yml
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+ delete mode 100644 workflows/ci-cd.yml
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 231 bytes | 231.00 KiB/s, done.
+Total 2 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   46aa165..cc39e5d  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'moved workflows to .github'
+[main ba867ba] moved workflows to .github
+ 1 file changed, 69 insertions(+)
+ create mode 100644 .github/workflows/ci-cd.yml
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 1.08 KiB | 1.08 MiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   cc39e5d..ba867ba  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'moved .github to tests'    
+[main fe0f9e4] moved .github to tests
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {.github => tests/.github}/workflows/ci-cd.yml (100%)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 334 bytes | 167.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   ba867ba..fe0f9e4  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'moved .github to source and updated Docker info'
+[main 5d5b392] moved .github to source and updated Docker info
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {tests/.github => .github}/workflows/ci-cd.yml (100%)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 355 bytes | 355.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/suvda-a/lab15_16.git
+   fe0f9e4..5d5b392  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'corrected app.py'                               
+[main 7254fcd] corrected app.py
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 292 bytes | 292.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/suvda-a/lab15_16.git
+   5d5b392..7254fcd  main -> main
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git pull
+Already up to date.
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git add .
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git commit -m 'app_test.py edit'
+[main 05ac01d] app_test.py edit
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+PS C:\Users\Suvdaa\OneDrive\Desktop\icsi214\lab15_16> git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 392 bytes | 392.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/suvda-a/lab15_16.git
+   7254fcd..05ac01d  main -> main
